@@ -7,6 +7,7 @@ const UserContext = React.createContext();
 
 // set axios to include credentials with every request
 axios.defaults.withCredentials = true;
+const token = localStorage.getItem('token');  // Adjust if your key is different
 
 export const UserContextProvider = ({ children }) => {
   const serverUrl = "https://taskmanager-oby5.onrender.com";
@@ -64,7 +65,11 @@ export const UserContextProvider = ({ children }) => {
           email: userState.email,
           password: userState.password,
         },
+        
         {
+          headers: {
+            'Authorization': `Bearer ${token}`,  // Send JWT in Authorization header
+          },
           withCredentials: true, // send cookies to the server
         }
       );
@@ -88,11 +93,15 @@ export const UserContextProvider = ({ children }) => {
     }
   };
 
-  // get user Looged in Status
+  // get user Looged in 
+  const token = localStorage.getItem("token");
   const userLoginStatus = async () => {
     let loggedIn = false;
     try {
       const res = await axios.get(`${serverUrl}/api/v1/login-status`, {
+        headers : {
+          Authorization : `Bearer ${token}`
+        },
         withCredentials: true, // send cookies to the server
       });
 
