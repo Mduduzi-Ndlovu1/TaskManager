@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors";
 import connect from "./src/db/connect.js";
 import cookieParser from "cookie-parser";
 import fs from "node:fs";
@@ -16,19 +15,9 @@ const allowedOrigins = [
 ]
 // middleware
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);  // Allow the request
-    } else {
-      callback(new Error('Not allowed by CORS'));  // Reject the request
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'],  // Allowed headers
-};
 
-app.use(cors(corsOptions));
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
