@@ -11,14 +11,25 @@ dotenv.config();
 const port = process.env.PORT || 8000;
 
 const app = express();
-
+const allowedOrigins = [
+'https://task-manager-red-one.vercel.app',
+]
 // middleware
-// app.use(
-//   cors({
-//     origin: process.env.CLIENT_URL,
-//     credentials: true,
-//   })
-// );
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);  // Allow the request
+    } else {
+      callback(new Error('Not allowed by CORS'));  // Reject the request
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'],  // Allowed headers
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
