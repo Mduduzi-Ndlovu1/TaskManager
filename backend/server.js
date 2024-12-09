@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import connect from "./src/db/connect.js";
 import cookieParser from "cookie-parser";
 import fs from "node:fs";
@@ -10,15 +11,14 @@ dotenv.config();
 const port = process.env.PORT || 8000;
 
 const app = express();
-const allowedOrigins = [
-'https://task-manager-red-one.vercel.app',
-]
+
 // middleware
-
-
-
-
-
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

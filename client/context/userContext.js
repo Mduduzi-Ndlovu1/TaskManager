@@ -1,4 +1,3 @@
-"use client"
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState, useContext } from "react";
@@ -65,11 +64,7 @@ export const UserContextProvider = ({ children }) => {
           email: userState.email,
           password: userState.password,
         },
-        
         {
-          headers: {
-            'Authorization': `Bearer ${token}`,  // Send JWT in Authorization header
-          },
           withCredentials: true, // send cookies to the server
         }
       );
@@ -93,14 +88,11 @@ export const UserContextProvider = ({ children }) => {
     }
   };
 
-  // get user Looged in 
+  // get user Looged in Status
   const userLoginStatus = async () => {
     let loggedIn = false;
     try {
       const res = await axios.get(`${serverUrl}/api/v1/login-status`, {
-        headers : {
-          Authorization : `Bearer ${token}`
-        },
         withCredentials: true, // send cookies to the server
       });
 
