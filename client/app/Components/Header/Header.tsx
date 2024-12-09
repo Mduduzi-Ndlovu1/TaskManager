@@ -54,35 +54,7 @@ function Header() {
           {userId ? "Add a new Task" : "Login / Register"}
         </button>
 
-        <div className="flex gap-4 items-center">
-          <Link
-            href=""
-            passHref
-            target="_blank"
-            rel="noopener noreferrer"
-            className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]"
-          >
-            {github}
-          </Link>
-          <Link
-            href=""
-            passHref
-            target="_blank"
-            rel="noopener noreferrer"
-            className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]"
-          >
-            {moon}
-          </Link>
-          <Link
-            href=""
-            passHref
-            target="_blank"
-            rel="noopener noreferrer"
-            className="h-[40px] w-[40px] text-purple-500 rounded-full flex items-center justify-center text-lg border-2 border-[#E6E6E6]"
-          >
-            {profile}
-          </Link>
-        </div>
+        
       </div>
     </header>
   );
